@@ -1,51 +1,72 @@
-const buttons=document.querySelectorAll('button');
+const numbers=document.querySelectorAll('.number');
+const operators=document.querySelectorAll('.operator');
+const clear=document.querySelector('.clear');
+const equal=document.querySelector('.equal');
 const display=document.querySelector('.display span');
 let inputes=[];
+let concatInput=[];
 let operator;
-buttons.forEach(button=>{
+
+numbers.forEach(button=>{
     button.addEventListener('click',(e)=>{
-        if(e.target.value==='clear')
-            clear(e.target.value);
-        if(['*','+','-','/'].includes(userInput)){
-            if(inputes.length!=0)
-            
-        }
-        populate(e.target.value);
+        inputes.push(e.target.value);
+        display.textContent=inputes.join('');
     });
 });
-function clear(userInput){
-    display.textContent="";
+operators.forEach(button=>{
+    button.addEventListener('click',(e)=>{
+        evaluate(e.target.value);
+    });
+});
+clear.addEventListener('click',(e)=>{
+    clearScreen();
+});
+equal.addEventListener('click',(e)=>{
+    results();
+});
+
+function clearScreen(){
+    display.textContent="0";
     inputes.length=0;
+    concatInput.length=0;
     operator=undefined;
 }
-function populate(userInput){
-    if(userInput==='='){
-        inputes.push(display.textContent);
-        console.log(display.textContent);
-        result=operate(operator,inputes[0],inputes[1]);
-        display.textContent=result;
-    }
-    else if(['*','+','-','/'].includes(userInput)){
-        inputes.push(display.textContent);
-        console.log(display.textContent);
+function results(){
+    concatInput[1]=inputes.join('');
+    inputes.length=0;
+    result=operate(operator,concatInput[0],concatInput[1]);
+    display.textContent=result;
+    inputes.push(result);
+}
+function evaluate(userInput){
+    if(concatInput.length == 1 ){
+        concatInput[1]=inputes.join('');
+        inputes.length=0;
+        result=operate(operator,concatInput[0],concatInput[1]);
         operator=userInput;
-        display.textContent="";
+        display.textContent=result;
+        concatInput.length=0;
+        concatInput[0]=result;
     }
     else{
-        display.textContent+=userInput;
+        concatInput.length=0;
+        concatInput[0]=inputes.join('');
+        inputes.length=0;
+        operator=userInput;
+        display.textContent=concatInput[0];
     }
 }
 function add(a,b){
-    return a+b;
+    return +a + +b;
 }
 function subtract(a,b){
-    return a-b;
+    return +a - +b;
 }
 function multiply(a,b){
-    return a*b;
+    return +a * +b;
 }
 function divide(a,b){
-    return a/b;
+    return +a / +b;
 }
 function operate(op,a,b){
     switch (op) {
@@ -53,6 +74,6 @@ function operate(op,a,b){
         case "-": return subtract(a,b); break;
         case "*": return multiply(a,b); break;
         case "/": return divide(a,b); break;
-        default: return NaN; break;
+        default: return "unknown operator"; break;
     }
 }
