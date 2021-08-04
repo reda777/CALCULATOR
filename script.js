@@ -9,8 +9,21 @@ let operator;
 
 numbers.forEach(button=>{
     button.addEventListener('click',(e)=>{
-        inputes.push(e.target.value);
-        display.textContent=inputes.join('');
+        if(e.target.value==='.'){
+            if(!inputes.includes('.')){
+                inputes.push(e.target.value);
+                display.textContent=inputes.join('');
+            }
+        }
+        else if(e.target.value==='backspace'){
+            inputes.pop();
+            display.textContent=inputes.join('');
+        }
+        else{
+            inputes.push(e.target.value);
+            display.textContent=inputes.join('');
+        }
+            
     });
 });
 operators.forEach(button=>{
@@ -57,16 +70,20 @@ function evaluate(userInput){
     }
 }
 function add(a,b){
-    return +a + +b;
+    return round(+a + +b);
 }
 function subtract(a,b){
-    return +a - +b;
+    return round(+a - +b);
 }
 function multiply(a,b){
-    return +a * +b;
+    return round(+a * +b);
 }
 function divide(a,b){
-    return +a / +b;
+    return round(+a / +b);
+}
+function round(num) {
+    let multiplier = Math.pow(10, 17);
+    return Math.round(num * multiplier) / multiplier;
 }
 function operate(op,a,b){
     switch (op) {
