@@ -6,28 +6,23 @@ const display=document.querySelector('.display span');
 let inputes=[];
 let concatInput=[];
 let operator;
-
-numbers.forEach(button=>{
-    button.addEventListener('click',(e)=>{
-        if(e.target.value==='.'){
-            if(!inputes.includes('.')){
-                inputes.push(e.target.value);
-                display.textContent=inputes.join('');
-            }
-        }
-        else if(e.target.value==='backspace'){
-            inputes.pop();
-            display.textContent=inputes.join('');
-        }
-        else{
-            inputes.push(e.target.value);
-            display.textContent=inputes.join('');
-        }
-            
+document.onkeydown = function (e) {
+    if(['0','1','2','3','4','5','6','7','8','9','.','Backspace'].includes(e.key))
+        populateScreen(e.key);
+    if(['/','*','-','+'].includes(e.key))
+        evaluate(e.key);
+    if(['Enter'].includes(e.key))
+        results();
+    if(['Delete'].includes(e.key))
+        clearScreen();
+}
+numbers.forEach(number=>{
+    number.addEventListener('click',(e)=>{
+        populateScreen(e.target.value);
     });
 });
-operators.forEach(button=>{
-    button.addEventListener('click',(e)=>{
+operators.forEach(operator=>{
+    operator.addEventListener('click',(e)=>{
         evaluate(e.target.value);
     });
 });
@@ -38,6 +33,22 @@ equal.addEventListener('click',(e)=>{
     results();
 });
 
+function populateScreen(userInput){
+    if(userInput==='.'){
+        if(!inputes.includes('.')){
+            inputes.push(userInput);
+            display.textContent=inputes.join('');
+        }
+    }
+    else if(userInput==='Backspace'){
+        inputes.pop();
+        display.textContent=inputes.join('');
+    }
+    else{
+        inputes.push(userInput);
+        display.textContent=inputes.join('');
+    }
+}
 function clearScreen(){
     display.textContent="0";
     inputes.length=0;

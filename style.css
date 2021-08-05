@@ -5,6 +5,8 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-family: 'Courier New', monospace;
+    font-size: 24px;
 }
 .equal{
     grid-column: 4/5;
@@ -13,10 +15,6 @@ body{
 .clear{
     grid-column: 4/5;
     grid-row:2/span 2;
-}
-button[value="0"]{
-    grid-column: 2/span 2;
-    grid-row: 5/6;
 }
 .display{
     box-sizing: border-box;
@@ -32,4 +30,23 @@ button[value="0"]{
     display:inline-grid;
     grid-template-columns: repeat(4,80px);
     grid-template-rows: repeat(5,80px);
+}
+button{
+    color:#e0883f;
+    background: white;
+    font: inherit;
+    border: none;
+    border-radius: 50%;
+}
+.number{
+    color:black;
+    border: none;
+    border-bottom: 1px solid transparent;
+    border-image: linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+    -webkit-border-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+    -moz-border-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+    border-image-slice: 1;
+}
+button:hover{
+    background: rgb(206, 206, 206);
 }
