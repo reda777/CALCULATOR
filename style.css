@@ -4,26 +4,29 @@ html,body{
     height: 100%;
 }
 body{
+    display: grid; 
+    grid-template-rows: 15% auto 1px 5%;
+    background: #eeeded; 
     font-family: 'Courier New', monospace;
     font-size: 24px;
-    background: #eeeded;
 }
-footer{
-    height: 10%;
-    font-size: 12px;
+header{
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center; 
+    align-items: center; 
 }
 .calcul{
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 80%;
+    padding-top: 2vh;
 }
-header{
-    padding: 5px;
-    height: 10%;
+hr{
+    border-top: thin solid #c0bebe;
+    margin: 0;
+}
+footer{
+    font-size: 12px;
     display: flex;
     justify-content: center; 
     align-items: center; 
@@ -41,8 +44,8 @@ header{
     box-shadow: inset 0 3px 2px -2px rgb(209, 209, 209);
     border-radius: 5px;
     background: white;
-    width: 400px;
-    height: 80px;
+    width: 60vh;
+    height: 12vh;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -50,11 +53,10 @@ header{
 }
 .buttons{
     display:inline-grid;
-    grid-template-columns: repeat(5,80px);
-    grid-template-rows: repeat(4,80px);
+    grid-template-columns: repeat(5,12vh);
+    grid-template-rows: repeat(4,12vh);
 }
 button{
-    color:#e0883f;
     background: white;
     border: none;
     font: inherit;
@@ -63,7 +65,10 @@ button{
     transition-property: background;
     transition-duration: 250ms;
 }
-.number{
+.operator,#ce,#decimal{
+    color:#ec6e06;
+}
+.number,.equal,.clear{
     color:black;
 }
 button:hover{

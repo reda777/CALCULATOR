@@ -42,11 +42,16 @@ function populateScreen(userInput){
     }
     else if(userInput==='Backspace'){
         inputes.pop();
-        display.textContent=inputes.join('');
+        if(inputes.length!==0)
+            display.textContent=inputes.join('');
+        else
+            display.textContent='0';
     }
     else{
-        inputes.push(userInput);
-        display.textContent=inputes.join('');
+        if(inputes.length<26){
+            inputes.push(userInput);
+            display.textContent=inputes.join('');
+        }
     }
 }
 function clearScreen(){
@@ -90,6 +95,10 @@ function multiply(a,b){
     return round(+a * +b);
 }
 function divide(a,b){
+    if(b==0){
+        clearScreen();
+        return 'Impossible';
+    }
     return round(+a / +b);
 }
 function round(num) {
@@ -102,6 +111,6 @@ function operate(op,a,b){
         case "-": return subtract(a,b); break;
         case "*": return multiply(a,b); break;
         case "/": return divide(a,b); break;
-        default: return "unknown operator"; break;
+        default: return "operator error"; break;
     }
 }
